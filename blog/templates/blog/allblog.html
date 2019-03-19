@@ -1,7 +1,6 @@
 
 <!doctype html>
 <html lang="en">
-
   <head>
       {% load staticfiles%}
     <meta charset="utf-8">
@@ -10,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>SantoshKumarSanwal blog</title>
+    <title>Blog Area</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -21,15 +20,15 @@
 
   <header>
       <nav class="navbar navbar-expand-lg dark bg-dark">
-          <a class="navbar-brand" href="{%url 'home'%}">Santosh Sanwal</a>
+          <a class="navbar-brand" href="{% url 'home'%}">Santosh Sanwal</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                   aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav ml-auto">
-                  <a class="nav-item nav-link" href="{% static '0_Santosh-Sr. QA.doc'%}">Resume</a>
-                  <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+                <a class="nav-item nav-link" href="{% static '0_Santosh-Sr. QA.doc'%}">Resume</a>
+                  <a class="nav-item nav-link disabled" href="{% url 'allblogs' %}">Blog</a>
                   <a class="nav-item nav-link" href="https://www.linkedin.com/in/santosh-sanwal-62150a55">Linkedin</a>
                   <a class="nav-item nav-link" href="https://twitter.com/SanwalSantosh">Twitter</a>
               </div>
@@ -39,46 +38,29 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">Hi, I am santosh</h1>
-          <p class="lead text-muted">I love doing web development by passion. i am tester by profession</p>
-          <p>
-            <a href="mailto:santoshkumarsanwal@gmail.com" class="btn btn-primary my-2">Email</a>
-              
+     <div class="container">
+      <h1 class="text-center pt-3">Welcome to Santosh's Blog</h1>
+        <br>
+        <br>
+         <h2>Latest Posts</h2>
+          <hr>
 
-            <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
-          </p>
-            <img class="rounded-circle" src="{% static 'DSC_0003.JPG' %}" height="300" width="500">
-            
-        </div>
-      </section>
+         {% for blog in blogs.all %}
+         <hr>
+         <img class="rounded" src="{{blog.image.url}}" height=200, width=200 />
+         <a href="{% url 'details' blog.id %}"><h3 class="card-text">{{ blog.title }}</h3></a>
+         <p class="card-text">{{ blog.pub_date_pretty}}</p>
+         <p class="card-text">{{ blog.summary }}</p>
+         <hr>
+         {% endfor %}
+     </div>
 
-      <div class="album py-5 bg-light">
-        <div class="container">
 
-          <div class="row">
-
-            {% for job in jobs.all %}
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="{{job.image.url}}">
-                <div class="card-body">
-                  <p class="card-text">{{ job.summary }}</p>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
 
     </main>
 
     <footer class="text-muted">
       <div class="container text-center">
-          <hr>
           <p>©copyright santosh sanwal {% now "Y"%}</p>
       </div>
     </footer>
